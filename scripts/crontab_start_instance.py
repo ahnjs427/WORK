@@ -5,24 +5,25 @@ import boto3
 region = 'ap-northeast-2'
 ec2 = boto3.client('ec2', region_name=region)
 instances = [
-             'i-02c293acaa8253742', #renderfarm-01
-             'i-03f387e9c9503fc5d', #renderfarm-02
-             'i-0ac71f3ffd78d2750', #renderfarm-03
-             'i-0d0c316658c280adf', #renderfarm-04
-             'i-0aedf0d4ccad67be9', #renderfarm-05
+             'i-02c293acaa8253742',   #renderfarm-01
+             'i-03f387e9c9503fc5d',   #renderfarm-02
+             'i-0ac71f3ffd78d2750',   #renderfarm-03
+             'i-0d0c316658c280adf',   #renderfarm-04
+             'i-0aedf0d4ccad67be9',   #renderfarm-05
 
-             'i-0b2fbdf3602807d28', #VDI-PC-01
+             'i-0b2fbdf3602807d28',   #VDI-PC-01
             #  'i-0f7375d22aa29ed32', #VDI-PC-02
-             'i-09a97b01606de4b71', #VDI-PC-03
+             'i-09a97b01606de4b71',   #VDI-PC-03
             #  'i-08f0191d84289ddff', #VDI-PC-04
             #  'i-0b2c8981b686fdb5f', #VDI-PC-05
-             'i-0e3d56c121c36294a', #VDI-PC-06
-             'i-0922dc46e95339f2b', #VDI-PC-07
-             'i-069b14073a2e65356', #VDI-PC-08
-             'i-0918baf2bacf3740c', #VDI-PC-09
-             'i-06fa2924c38b72379', #VDI-PC-10 : TD-a
-             'i-04adda334f488ea0b', #VDI-PC-11 : TD-b
-            # 'i-04532fbb62e9a474d', #VDI-PC-12 : TD-c
+             'i-0e3d56c121c36294a',   #VDI-PC-06
+             'i-0922dc46e95339f2b',   #VDI-PC-07
+             'i-069b14073a2e65356',   #VDI-PC-08
+             'i-0918baf2bacf3740c',   #VDI-PC-09
+            #  'i-06fa2924c38b72379', #VDI-PC-10 : TD-a
+             'i-04adda334f488ea0b',   #VDI-PC-11 : TD-b
+            # 'i-04532fbb62e9a474d',  #VDI-PC-12 : TD-c
+            # 'i-0ff37626bf86d68df',  #VDI-PC-13 : for NUKE & HIERO
             ]
 ec2.start_instances(InstanceIds=instances)
 
