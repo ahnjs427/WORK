@@ -21,9 +21,9 @@ instances = [
              'i-069b14073a2e65356',   #VDI-PC-08
              'i-0918baf2bacf3740c',   #VDI-PC-09
             #  'i-06fa2924c38b72379', #VDI-PC-10 : TD-a
-             'i-04adda334f488ea0b',   #VDI-PC-11 : TD-b
-            # 'i-04532fbb62e9a474d',  #VDI-PC-12 : TD-c
-            # 'i-0ff37626bf86d68df',  #VDI-PC-13 : for NUKE & HIERO
+            #  'i-04adda334f488ea0b', #VDI-PC-11 : TD-b
+            #  'i-04532fbb62e9a474d', #VDI-PC-12 : TD-c
+            #  'i-0ff37626bf86d68df', #VDI-PC-13 : for NUKE & HIERO
             ]
 ec2.start_instances(InstanceIds=instances)
 
