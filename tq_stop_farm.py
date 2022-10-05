@@ -31,9 +31,7 @@ if not katana_job in result_list:
 
         for i in running_instance_list:
             ec2.Instance(i).stop()
-else:
-    print(active_jobs)
-    print('activng...')
+
 
 
 
