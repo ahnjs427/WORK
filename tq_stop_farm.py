@@ -18,7 +18,7 @@ for dict_obj in active_jobs:
     string = (dict_obj['title'])
     result_list.append(string.split(' ')[0])
 
-# 2D-Farm Start ShutDown Sequence
+# 3D-Farm Start ShutDown Sequence
 if not katana_job in result_list:
     time.sleep(300)
     if not katana_job in result_list:
