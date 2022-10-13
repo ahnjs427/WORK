@@ -24,6 +24,8 @@ instances = [
             #  'i-04adda334f488ea0b', #VDI-PC-11 : TD-b
             #  'i-04532fbb62e9a474d', #VDI-PC-12 : TD-c
             #  'i-0ff37626bf86d68df', #VDI-PC-13 : for NUKE & HIERO
+
+            #  'i-0a5d83de33c0462cf', #Omniverse-Nucleus
             ]
 ec2.start_instances(InstanceIds=instances)
 
