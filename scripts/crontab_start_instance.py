@@ -17,7 +17,7 @@ instances = [
             #  'i-08f0191d84289ddff', #VDI-PC-04
             #  'i-0b2c8981b686fdb5f', #VDI-PC-05
              'i-0e3d56c121c36294a',   #VDI-PC-06
-             'i-0922dc46e95339f2b',   #VDI-PC-07
+            #  'i-0922dc46e95339f2b',   #VDI-PC-07
              'i-069b14073a2e65356',   #VDI-PC-08
              'i-0918baf2bacf3740c',   #VDI-PC-09
             #  'i-06fa2924c38b72379', #VDI-PC-10 : TD-a
