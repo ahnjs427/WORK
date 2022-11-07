@@ -15,8 +15,7 @@ env.roledefs = {
 
 
     'VDI'  : [ '172.31.11.228', '172.31.3.20',  '172.31.10.171', '172.31.15.209', '172.31.14.249', 
-               '172.31.5.227',  '172.31.10.29', '172.31.1.175',  '172.31.10.130', '172.31.9.147', 
-	           '172.31.12.251',
+               '172.31.5.227',  '172.31.10.29', '172.31.1.175',  '172.31.10.130', '172.31.9.147',
              ],
 }
 
@@ -28,9 +27,7 @@ def script_farm():
  
 @roles('VDI')
 def script_vdi():
-    run('sudo rm -rf /usr/genarts')
-    run('sudo cp -rf /netapp/data/Applications/genarts/genarts.tar.gz /tmp')
-    run('sudo tar -xzf /tmp/genarts.tar.gz -C /usr')
+    run('nvidia-smi')
 
 
 
