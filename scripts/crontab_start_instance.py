@@ -6,9 +6,9 @@ region = 'ap-northeast-2'
 ec2 = boto3.client('ec2', region_name=region)
 instances = [
              'i-02c293acaa8253742',     #renderfarm-01
-            #  'i-03f387e9c9503fc5d',     #renderfarm-02
-            #  'i-0ac71f3ffd78d2750',     #renderfarm-03
-            #  'i-0d0c316658c280adf',     #renderfarm-04
+            #  'i-0bd160a64359c65b1,     #renderfarm-02
+            #  'i-0222307a6c89a2665',     #renderfarm-03
+            #  'i-0fb59d0ee3b63ace7',     #renderfarm-04
              'i-0aedf0d4ccad67be9',     #renderfarm-05
 
              'i-0b2fbdf3602807d28',     #VDI-PC-01
