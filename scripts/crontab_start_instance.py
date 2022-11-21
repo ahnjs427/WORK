@@ -5,7 +5,7 @@ import boto3
 region = 'ap-northeast-2'
 ec2 = boto3.client('ec2', region_name=region)
 instances = [
-             'i-02c293acaa8253742',     #renderfarm-01
+               'i-0adc529bbe14bd1d7',     #renderfarm-01
             #  'i-0bd160a64359c65b1,     #renderfarm-02
             #  'i-0222307a6c89a2665',     #renderfarm-03
             #  'i-0fb59d0ee3b63ace7',     #renderfarm-04
