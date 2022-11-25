@@ -9,13 +9,13 @@ env.roledefs = {
 
     'TD'   : [ '172.31.9.147',  '172.31.12.251', '172.31.0.249' ],
 
-    'FARM' : [ '172.31.4.220',  '172.31.3.46',  '172.31.9.132',  '172.31.15.134', '172.31.1.192', 
-               '172.31.1.192',  '172.31.15.45', '172.31.0.255',  '172.31.1.86',   '172.31.0.172' 
+    'FARM' : [ '172.31.0.146', '172.31.6.112', '172.31.5.61', '172.31.2.186', '172.31.1.192'
              ],
 
 
-    'VDI'  : [ '172.31.11.228', '172.31.3.20',  '172.31.10.171', '172.31.15.209', '172.31.14.249', '172.31.5.227',
-               '172.31.10.29', '172.31.1.175',  '172.31.10.130',
+    'VDI'  : [ '172.31.11.228', '172.31.3.20', '172.31.10.171', '172.31.15.209', '172.31.14.249', 
+               '172.31.5.227',
+               '172.31.10.29', '172.31.1.175', '172.31.10.130',
              ],
 
     'AHN'  : [ '172.31.0.249' ],
@@ -23,13 +23,10 @@ env.roledefs = {
 
 
 @roles('VDI')
-def install_NodeExporter():
-    run('sudo useradd -M -s /bin/bash prometheus_node-exporter')
-    run('sudo cp -rvf /netapp/data/Applications/prometheus/NodeExporter/node_exporter-1.4.0 /opt/')
-    run('sudo cp -rvf /netapp/data/Applications/prometheus/NodeExporter/node_exporter.service /etc/systemd/system/')
-    run('sudo systemctl daemon-reload')
-    run('sudo systemctl start node_exporter')
-    run('sudo systemctl enable node_exporter')
+def stopNodeexpoter():
+    run('sudo systemctl stop node_exporter')
+    run('sudo systemctl disable node_exporter')
+
     
 
 
