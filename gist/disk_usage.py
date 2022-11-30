@@ -13,8 +13,8 @@ works_list        = ['*']
 
 def get_dir_size(path='.'):
     total = 0
-    with os.scandir(path) as it:
-        for entry in it:
+    with os.scandir(path) as entries:
+        for entry in entries:
             if entry.is_file():
                 total += entry.stat().st_size
             elif entry.is_dir():
@@ -29,12 +29,12 @@ def convert_size(size_bytes):
     i = int(math.floor(math.log(size_bytes, 1024)))
     p = math.pow(1024, i)
     s = round(size_bytes / p, 2)
-    # return "%s %s" % (s, size_name[i])
     return f'{s} {size_name[i]}'
 
 for directory in publish_3d_list:
-    result = get_dir_size(f'/show/{show_name}/publish/{directory}')
-    print(f'{show_name}/publish/{directory}', convert_size(result))
-
-
-
+    pull_path = f'/show/{show_name}/publish/{directory}'
+    result = get_dir_size(pull_path)
+    if os.path.isdir(pull_path):
+        print(f'{show_name}/publish/{directory}', convert_size(result))
+    else:
+        print('updda')

@@ -1,0 +1,8 @@
+---
+- hosts: Windows
+  gather_facts: no
+  tasks:
+    - name: PING TEST FOR WINDOWS
+      ansible.builtin.win_ping:
+
+

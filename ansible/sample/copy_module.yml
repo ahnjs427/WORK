@@ -1,0 +1,29 @@
+---
+- hosts: "{{ variable_host | default('all') }}"
+  gather_facts: no
+  vars:
+    dccPath: /uranos/pipeline/setup/dcc
+    dcc: Katana4.5v1
+  tasks:
+    - name: Copy to lcoal storage
+      ansible.builtin.copy:
+        src : "{{ dccPath }}/katana/4.5v1/{{ dcc }}.tar.gz"
+        dest : "/usr/local"
+        remote_src: yes
+
+    - name: Make directory
+      ansible.builtin.file:
+        path : "/usr/local/{{ dcc }}"
+        state: directory
+      
+    - name: Extract katana tar
+      ansible.builtin.unarchive:
+        src : "/usr/local/{{ dcc }}.tar.gz"
+        dest : "/usr/local"
+        remote_src: yes
+      
+    - name: Delete katana tar
+      file:
+        path : "/usr/local/{{ dcc }}.tar.gz"
+        state: absent
+        

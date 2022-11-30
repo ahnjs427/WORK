@@ -1,0 +1,25 @@
+# ---
+# - hosts: "{{ variable_host | default('all') }}"
+#   gather_facts: no
+#   vars:
+#     dcc: /uranos/pipeline/setup/dcc
+#   tasks:
+#     - name: install pgbokeh 1.4.3
+#       shell: '{{ dcc }}/nuke/11.2v7/linux/nuke_11.2v7_install_ansible.sh || /bin/true'
+
+---
+- hosts: '{{ variable_host | default("all") }}'
+  gather_facts: no
+  vars:
+    dcc: /uranos/pipeline/setup/dcc
+    system: /uranos/pipeline/setup/system/centos-7.6.1810
+  # tasks:
+  #   - name: insert icon - "TxConverter", "UsdManager", "UsdViewer"
+  #     shell: '{{ system }}/insert_icons/insert_icons.sh || /bin/true'
+  tasks:
+  - name: install renderman 24.4
+    shell: '{{ dcc }}/renderman/24.4/renderman_all_24.4.sh || /bin/true'
+
+  - name: install katana 5.0v2
+    shell: '{{ dcc }}/katana/5.0v2/install.sh || /bin/true'
+        

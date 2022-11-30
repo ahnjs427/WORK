@@ -1,0 +1,174 @@
+---
+- hosts: "{{ variable_host | default('all') }}"
+  gather_facts: no
+  vars:
+    dcc: /uranos/pipeline/setup/dcc
+    system: /uranos/pipeline/setup/system/rocky-8.5
+  tasks:
+    - name: git deploy 
+      ansible.builtin.git:
+        repo: "http://10.1.20.127/td/vfxrepo.git"
+        dest: /opt/vfxrepo
+        update: yes
+
+    - name: backup fstab 
+      shell: cp -rvf /etc/fstab /etc/fstab.bak || /bin/true
+
+    - name: config fstab
+      shell: echo 10.1.40.157:/dramanfs /uranos nfs defaults 0 0 >> /etc/fstab || /bin/true
+
+    - name: mount uranos
+      shell: mkdir /uranos && mount -a && ln -s /uranos/show / && ln -s /uranos/assetlib / || /bin/true
+
+    - name: install rez
+      shell: '{{ system }}/rez/rez_install_linux_ansible.sh || /bin/true'
+
+    - name: setup RockyOS local repository
+      shell: '{{ system }}/install-local-repo/install_rocky_local_repo.sh || /bin/true'
+
+    - name: Copy Legacy Library - libgcrypt
+      shell: 'cp -rvf {{ system }}/libs-copy/libgcrypt.so/* /lib64 || /bin/true' 
+    
+    - name: Copy Legacy Library - libicu50.so
+      shell: 'cp -rvf {{ system }}/libs-copy/libicu50.so/* /lib64 || /bin/true' 
+
+    - name: libs-maya
+      shell: '{{ system }}/libs-maya/install_libs_maya.sh'
+
+    - name: libXscrnSaver
+      shell: '{{ system }}/libXScrnSaver/install_libXScrnSaver-lib.sh || /bin/true'
+                  
+    - name: symlink - 'nautilus script', 'dip coomand', 'locus-menu'
+      shell: '{{ system }}/dip-nautilus-applications/dip-nautilus-menu.sh || /bin/true'
+
+    - name: add environment to '$HOME/.bashrc'
+      shell: '{{ system }}/bashrc/add_bashrc.sh || /bin/true'
+
+    - name: visual studio code
+      shell: 'dnf localinstall -y {{ system }}/install_vscode/code-1.64.0-1643864066.el7.x86_64.rpm || /bin/true'
+
+    - name: Install google-chrome 
+      shell: '{{ system }}/install-google-chrome/install_google-chrome.sh || /bin/true'
+
+    - name: dconf-editor
+      shell: 'rpm -ivh {{ system }}/install-gnome-dconf-editor/dconf-editor-3.28.0-1.el8.x86_64.rpm || /bin/true'
+
+    - name: tweaks-tool
+      shell: '{{ system }}/install-gnome-tweaks/install-gnome-tweaks.sh'
+
+    - name: gnome-shell-extension 
+      shell: '{{ system }}/install-gnome-shell-extension/install-gnome-shell-extension.sh || /bin/true'
+
+    - name: disable-firewalld
+      shell: '{{ system }}/disable-firewalld/disable-firewalld.sh || /bin/true'
+
+    - name: disable-selinux
+      shell: '{{ system }}/disable-selinux/disable-selinux.sh || /bin/true'
+
+    - name: time-sync
+      shell: '{{ system }}/timesync-chrony/time-sync.sh || /bin/true'
+
+    - name: Disable USB
+      shell: '{{ system }}/usb-block/usb-block.sh || /bin/true'
+
+    - name: Setup NetCat
+      shell: '{{ system }}/netcat/setup_rc.sh || /bin/true'
+    
+    - name: Define PYTHON3
+      shell: '{{ system }}/define_python3/define_python3.sh'
+
+# DCC
+
+    - name: Install dcc "3DEqualizer4R5"
+      shell: '{{ dcc }}/3de/4r5/custom/3de_4r5_install.sh || /bin/true'
+
+    - name: Install dcc "KATANA 4.5v1"
+      shell: '{{ dcc }}/katana/4.5v1/katana_4.5v1_install_offline_ansible.sh || /bin/true'
+
+    - name: Install dcc "KATANA 5.0v2"
+      shell: '{{ dcc }}/katana/5.0v2/katana_5.0v2_install_offline_ansible.sh || /bin/true'
+
+    - name: Install dcc "RENDERMAN 24.2"
+      shell: '{{ dcc }}/renderman/24.2/renderman_all_24.2.sh || /bin/true'
+
+    - name: Install dcc "RENDERMAN 24.3"
+      shell: '{{ dcc }}/renderman/24.3/renderman_all_24.3.sh || /bin/true'
+    
+    - name: Install dcc "RENDERMAN 24.4"
+      shell: '{{ dcc }}/renderman/24.4/renderman_all_24.4.sh || /bin/true'
+    
+    # - name: Install dcc "TRACTOR-BLADE & Userfarm"
+    #   shell: '{{ dcc }}/renderman_tractor-blade/2.4/renderman_tractor_2.4.sh || /bin/true'
+
+    - name: Install dcc 'NUKE 11.2v7'
+      shell: '{{ dcc }}/nuke/11.2v7/linux/nuke_11.2v7_install_ansible.sh || /bin/true'
+
+    - name: Install dcc 'NUKE 12.2v7'
+      shell: '{{ dcc }}/nuke/12.2v7/nuke_12.2v7_install_ansible.sh || /bin/true'
+
+    - name: Install dcc 'MARI 4.6v4'
+      shell: '{{ dcc }}/mari/4.6/install.sh'
+
+    - name: Install dcc 'MARI 4.8v4'
+      shell: '{{ dcc }}/mari/4.8/install.sh'
+
+    - name: Install dcc 'HOUDINI 18.5.596'
+      shell: '{{ dcc }}/houdini/18.5.596/houdini_18.5.596_install.sh || /bin/true'
+
+    - name: Install dcc 'SAPPHIRE'
+      shell: '{{ dcc }}/sapphire/11.04/sapphire_11.04_install_ansible.sh || /bin/true'
+
+    - name: Install dcc 'MOCHA PRO'
+      shell: '{{ dcc }}/mochapro/5.6.0/mochapro_5.6.0_install_ansible.sh || /bin/true'
+
+    - name: Install dcc 'NEAT VIDEO 4.8.8'
+      shell: '{{ dcc }}/neatvideo/4.8.8/linux/neatvideo_4.8.8_install_ansible.sh || /bin/true'
+
+    - name: Install dcc 'OPTICAL FLARES 1.0.86'
+      shell: '{{ dcc }}/opticalflares/1.0.86/linux/opticalflares_1.0.86_install_ansible.sh || /bin/true'
+
+    - name: Install dcc 'PGBOKEH 1.4.7'
+      shell: '{{ dcc }}/pgbokeh/1.4.7/linux/pgbokeh_1.4.7_install_ansible.sh || /bin/true'
+
+    - name: Install dcc 'RSMB 5.2.4'
+      shell: '{{ dcc }}/rsmb/5.2.4/linux/rsmb_5.2.4_install_ansible.sh || /bin/true'
+
+    - name: Install 'TWIXTOR 5.2.3'
+      shell: '{{ dcc }}/twixtor/5.2.3/linux/twixtor_5.2.3_install_ansible.sh || /bin/true'
+
+    # - name: install dcc 'MAYA 2022.3'
+    #   shell: '{{ dcc }}/maya/2022.3/maya_2022.3_ansible.sh || /bin/true'
+
+    - name: install 'shotgridcreate'
+      shell: '{{ dcc }}/shotgridcreate/linux/install_shotgridcreate.sh || /bin/true'
+
+    - name: install dcc 'RV'
+      shell: '{{ dcc }}/rv/2021.1.0/rv_2021.1.0_install.sh || /bin/true'
+
+    # - name: install dcc 'Substance Designer'
+    #   shell: '{{ dcc }}/SubstanceDesigner/install_SubstanceDesigner.sh || /bin/true'
+
+    # - name: install dcc 'Substance Painter'
+    #   shell: '{{ dcc }}/SubstancePainter/install_SubstancePainter.sh || /bin/true'
+    
+    - name: Install NVIDIA driver - Pre Processing
+      shell: '{{ system }}/nvidia/nvidia_470.86_ansible_1.sh || /bin/true'
+      
+    - name: Reboot for NVIDIA driver
+      ansible.builtin.reboot:
+
+    - name: Connection wait
+      ansible.builtin.wait_for_connection:
+        delay: "120"
+        timeout: "360"
+
+    - name: Install NVIDIA driver
+      shell: '{{ system }}/nvidia/nvidia_470.86_ansible_2.sh || /bin/true'
+
+    - name: Reboot
+      ansible.builtin.reboot:
+
+  # - name: chrome-ssl
+
+
+

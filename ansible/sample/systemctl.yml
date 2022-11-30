@@ -1,0 +1,10 @@
+---
+- hosts: "{{ variable_host | default('all') }}"
+  gather_facts: yes
+
+  tasks:
+    - name: systemctl restart 'tractor-blade.service'
+      ansible.builtin.systemd:
+        name: tractor-blade
+        state: restarted
+        

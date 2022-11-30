@@ -1,0 +1,10 @@
+---
+- hosts: "{{ variable_host | default('all') }}"
+  gather_facts: no
+  tasks:
+    - name: git deploy
+      ansible.builtin.git:
+        repo: "http://10.1.20.127/td/vfxrepo.git"
+        dest: /opt/vfxrepo
+        update: yes
+        force: yes

@@ -1,0 +1,21 @@
+---
+- hosts: Windows
+  gather_facts: no
+  vars:
+    GIT_DIR: "C:/opt/vfxrepo/.git"
+    SOURCE_DIR: "C:/opt/vfxrepo"
+  tasks:
+#    - name: fetch the vfxrepo
+#      win_command: git --git-dir="{{ GIT_DIR }}" --work-tree=. -C "{{ SOURCE_DIR }}" pull
+
+    - name: submodule init
+      win_command: git --git-dir="{{ GIT_DIR }}" --work-tree=. -C "{{ SOURCE_DIR }}" submodule init
+
+    - name: submoduel update
+      win_command: git --git-dir="{{ GIT_DIR }}" --work-tree=. -C "{{ SOURCE_DIR }}" submodule update
+
+#    - name: branch update
+#      win_command: git --git-dir="{{ GIT_DIR }}" --work-tree=. -C "{{ SOURCE_DIR }}" submodule foreach git checkout main
+
+#    - name: foreach git pull
+#      win_command: git --git-dir="{{ GIT_DIR }}" --work-tree=. -C "{{ SOURCE_DIR }}" submodule foreach git pull origin main
