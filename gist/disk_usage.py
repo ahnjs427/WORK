@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 import os
 
@@ -31,7 +31,7 @@ def convert_size(size_bytes):
     s = round(size_bytes / p, 2)
     return f'{s} {size_name[i]}'
 
-for directory in publish_3d_list:
+for directory in publish_2d_list:
     pull_path = f'/show/{show_name}/publish/{directory}'
     result = get_dir_size(pull_path)
     if os.path.isdir(pull_path):
