@@ -39,13 +39,4 @@ for directory in publish_3d_list:
         print(f'{show_name}/publish/{directory}', ':', convert_size(result))
     except:
         print(pull_path[6:], ':', '0 GB')
-
-
-dic = { 
-    'publish_2d': ['2d/assets', '2d/global', '2d/shots'],
-    'publish_3d': ['3d/assets', '3d/global', '3d/shots'],   
-    'screening' : ['*'],
-    'stuff'     : ['*'],
-    'wors'      : ['*'],
-}
     
