@@ -1,14 +1,17 @@
 #!/usr/bin/python3
 
 import os
+from pprint import pprint
 
 show_name = 'pipe'
 
-publish_2d_list = ['2d/assets', '2d/global', '2d/shots']
-publish_3d_list = ['3d/assets', '3d/global', '3d/shots']
-screening_list  = ['*']
-stuff_list      = ['*']
-works_list      = ['*']
+my_dict = { 
+    'publish': ['2d/assets', '2d/global', '2d/shots'],
+    'publish': ['3d/assets', '3d/global', '3d/shots'],   
+    'screening' : ['*'],
+    'stuff'     : ['*'],
+    'wors'      : ['*'],
+}
 
 
 def convert_size(size_bytes):
@@ -32,20 +35,15 @@ def get_dir_size(path='.'):
     return total
 
 
-for directory in publish_3d_list:
+for directory in my_dict.keys():
     pull_path = f'/show/{show_name}/publish/{directory}'
-    try:
-        result = get_dir_size(pull_path)
-        print(f'{show_name}/publish/{directory}', ':', convert_size(result))
-    except:
-        print(pull_path[6:], ':', '0 GB')
+    result = get_dir_size(pull_path)
+    print(result)
 
+# for k, v in my_dict.items():
+#     print(f'key: {k}, value: {v}')
 
-dic = { 
-    'publish_2d': ['2d/assets', '2d/global', '2d/shots'],
-    'publish_3d': ['3d/assets', '3d/global', '3d/shots'],   
-    'screening' : ['*'],
-    'stuff'     : ['*'],
-    'wors'      : ['*'],
-}
+# for i in my_dict.keys():
+#     print(i)
+
     
