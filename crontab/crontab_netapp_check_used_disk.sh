@@ -1,6 +1,7 @@
 #/bin/bash
 
-TARGET='/office_share/aws/Billing/daily_used_disk_size.txt'
+#TARGET='/office_share/aws/Billing/daily_used_disk_size.txt'
+TARGET='/dept_vfx/aws/Billing/daily_used_disk_size.txt'
 
 
 echo '' >> $TARGET

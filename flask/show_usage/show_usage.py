@@ -2,15 +2,15 @@
 
 import os
 
-show_name = 'poc'
+show_name = 'bkn'
 
 my_dict = { 
-            'publish'   : ['2d/assets', '2d/global', '2d/shots',
-                           '3d/assets', '3d/global', '3d/shots',],
-            'screening' : [''],
-            'stuff'     : [''],
-            'works'     : [''],
-            'mov'       : [''],
+            'publish'   : [ '2d/assets', '2d/global', '2d/shots',
+                            '3d/assets', '3d/global', '3d/shots', ],
+            'screening' : [ '' ],
+            'stuff'     : [ '' ],
+            'works'     : [ '' ],
+            'mov'       : [ '' ],
           }
 
 
